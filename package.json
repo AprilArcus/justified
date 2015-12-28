@@ -1,0 +1,32 @@
+{
+  "name": "justified",
+  "scripts": {
+    "start": "babel-node devServer.js",
+    "build": "webpack",
+    "clean": "rimraf build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AprilArcus/justified.git"
+  },
+  "author": "April Arcus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AprilArcus/justified/issues"
+  },
+  "homepage": "https://github.com/AprilArcus/justified#readme",
+  "devDependencies": {
+    "babel-core": "^6.3.26",
+    "babel-loader": "^6.2.0",
+    "babel-polyfill": "^6.3.14",
+    "babel-preset-es2015": "^6.3.13",
+    "document-register-element": "^0.5.3",
+    "dom4": "^1.5.2",
+    "es5-shim": "^4.4.1",
+    "express": "^4.13.3",
+    "ie8": "^0.2.9",
+    "rimraf": "^2.5.0",
+    "webpack": "^1.12.9",
+    "webpack-dev-middleware": "^1.4.0"
+  }
+}
