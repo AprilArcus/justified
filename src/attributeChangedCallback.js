@@ -1,6 +1,4 @@
-export default function(
-  name, previousValue, value
-) {
+export default function attributeChangedCallback(name, previousValue, value) {
   if (previousValue == null) {
     console.log(
       'got a new attribute ', name,

@@ -1,3 +1,3 @@
-export default function() {
+export function attachedCallback() {
   console.log('live on DOM ;-) ');
 }

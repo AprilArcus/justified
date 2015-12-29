@@ -1,7 +1,7 @@
-import createdCallback from './createdCallback';
-import attachedCallback from './attachedCallback';
-import detachedCallback from './detachedCallback';
-import attributeChangedCallback from './attributeChangedCallback';
+import { createdCallback } from './createdCallback';
+import { attachedCallback } from './attachedCallback';
+import { detachedCallback } from './detachedCallback';
+import { attributeChangedCallback } from './attributeChangedCallback';
 
 var MyElement = document.registerElement(
   'jus-ti-fied',
