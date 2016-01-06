@@ -1,7 +1,7 @@
 {
   "name": "justified",
   "scripts": {
-    "start": "babel-node devServer.js",
+    "start": "node devServer.js",
     "build": "webpack",
     "clean": "rimraf build"
   },
@@ -17,6 +17,7 @@
   "homepage": "https://github.com/AprilArcus/justified#readme",
   "devDependencies": {
     "babel-core": "^6.3.26",
+    "babel-eslint": "^5.0.0-beta",
     "babel-loader": "^6.2.0",
     "babel-plugin-transform-es3-member-expression-literals": "^6.3.13",
     "babel-plugin-transform-es3-property-literals": "^6.3.13",
@@ -26,8 +27,11 @@
     "document-register-element": "^0.5.3",
     "dom4": "^1.5.2",
     "es5-shim": "^4.4.1",
+    "eslint": "^1.10.3",
+    "eslint-loader": "^1.1.1",
+    "eslint-plugin-babel": "^3.0.0",
     "express": "^4.13.3",
-    "ie8": "WebReflection/ie8#693fe7c568c78dfa0bac4790b697b879901e53be",
+    "ie8": "0.2.10",
     "rimraf": "^2.5.0",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0"

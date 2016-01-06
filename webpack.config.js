@@ -5,6 +5,13 @@ module.exports = {
   devtool: 'cheap-module-source-map',
   entry: './src/element.js',
   module: {
+    preLoaders: [
+      {
+        test: /\.js$/,
+        loader: 'eslint',
+        include: path.resolve(__dirname, 'src')
+      }
+    ],
     loaders: [
       {
         test: /\.js$/,
@@ -18,6 +25,16 @@ module.exports = {
     filename: 'justified.js'
   },
   plugins: [
-    new webpack.NoErrorsPlugin()
-  ]
+    // new webpack.NoErrorsPlugin()
+  ],
+  eslint: {
+    configFile: 'src/.eslintrc',
+    fix: false,
+    formatter: require("eslint/lib/formatters/stylish"),
+    emitError: true,
+    failOnError: true,
+    emitWarning: true,
+    failOnWarning: false,
+    quiet: false,
+  }
 };
