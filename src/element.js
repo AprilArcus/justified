@@ -1,3 +1,9 @@
+/* @flow */
+
+declare class HTMLParagraphElement extends HTMLElement {
+  align: string;
+}
+
 document.registerElement(
   'jus-ti-fied',
   {
