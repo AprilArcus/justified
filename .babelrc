@@ -2,7 +2,8 @@
   "plugins": [
     "transform-es3-member-expression-literals",
     "transform-es3-property-literals",
-    "transform-es5-property-mutators"
+    "transform-es5-property-mutators",
+    "transform-flow-strip-types"
   ],
   "presets": ["es2015"]
 }
