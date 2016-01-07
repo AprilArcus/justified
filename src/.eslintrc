@@ -80,6 +80,7 @@
     "no-shadow-restricted-names": 2,
     "no-shadow": 2,
     "no-undef-init": 2,
+    "no-unused-vars": [1, { "args": "none" }],
     "no-use-before-define": 2,
     "array-bracket-spacing": [1, "never", {
       "singleValue": false,
@@ -112,7 +113,7 @@
       "ignoreUrls": true,
     }],
     "max-nested-callbacks": [2, 1],
-    "max-params": [2, 3],
+    "max-params": [2, 1],
     "max-statements": 0,
     "babel/new-cap": 2,
     "new-parens": 1,
