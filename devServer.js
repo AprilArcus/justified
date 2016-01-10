@@ -1,10 +1,9 @@
-const path = require('path');
-const express = require('express');
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const config = require('./webpack.config');
-
-const app = express();
+var express = require('express')
+  , webpack = require('webpack')
+  , webpackDevMiddleware = require('webpack-dev-middleware')
+  , config = require('./webpack.config')
+  , port = 3000
+  , app = express();
 
 app.use(express.static(__dirname));
 
@@ -13,7 +12,7 @@ app.use(webpackDevMiddleware(webpack(config), {
   publicPath: '/build/'
 }));
 
-app.listen(3000, null, err => {
+app.listen(port, null, function (err) {
   if (err) {
     console.log(err);
     return;

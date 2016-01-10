@@ -1,23 +1,20 @@
 /* @flow */
-/* eslint func-style: [1, "declaration"],
-          no-invalid-this: 0,
-          max-params: 0
-*/
+/* eslint func-style: 0, no-invalid-this: 0, max-params: 0 */
 
-export function createdCallback(): void {
+export function createdCallback (): void {
   console.log('here I am ^_^ ');
   console.log('with content: ', this.textContent);
 }
 
-export function attachedCallback(): void {
+export function attachedCallback (): void {
   console.log('live on DOM ;-) ');
 }
 
-export function detachedCallback(): void {
+export function detachedCallback (): void {
   console.log('leaving the DOM :-( )');
 }
 
-export function attributeChangedCallback(
+export function attributeChangedCallback (
   attributeLocalName: string,
   oldAttributeValue: ?string,
   newAttributeValue: ?string,
