@@ -4,10 +4,10 @@ var os = require('os')
   , minor
   , devServerInstance = require('./devServer')
   , runAll = require('npm-run-all')
-  , tasks = ['test:polyfill', 'test:native'];
+  , tasks = ['test:polyfill'/* , 'test:native' */];
 
 if (process.platform === 'linux' || process.platform === 'darwin') {
-  tasks.unshift('flow:check');
+  // tasks.unshift('flow:check');
 }
 
 /* eslint-disable no-magic-numbers */
@@ -29,7 +29,6 @@ runAll(tasks, {
   devServerInstance.close();
   process.exit(0);
 }).catch(function (err) {
-  console.log('fail');
   console.log(err);
   devServerInstance.close();
   process.exit(1);

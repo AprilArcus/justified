@@ -3,7 +3,11 @@
   "env": {
     "mocha": true
   },
+  "globals": {
+    "sinon": false,
+    "expect": false
+  },
   "rules": {
-    "max-nested-callbacks": [2, 3],
+    "max-nested-callbacks": [2, 5],
   }
 }
