@@ -5,16 +5,16 @@
 
 (
   function (f) {
-    window.setTimeout = f(window.setTimeout);
-    window.setInterval = f(window.setInterval);
+    window.setTimeout = f(window.setTimeout)
+    window.setInterval = f(window.setInterval)
   }
 )(
   function (f) {
     return function (c, t) {
-      var a = [].slice.call(arguments, 2);
+      var a = [].slice.call(arguments, 2)
       return f(function () {
-        c.apply(this, a);
-      }, t);
-    };
+        c.apply(this, a)
+      }, t)
+    }
   }
-);
+)

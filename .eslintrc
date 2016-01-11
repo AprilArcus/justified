@@ -162,7 +162,7 @@
     "quotes": [1, "single"],
     "require-jsdoc": 0,
     "semi-spacing": 1,
-    "semi": [1, "always"],
+    "semi": [1, "never"],
     "sort-vars": 0,
     "space-after-keywords": 1,
     "space-before-blocks": 1,

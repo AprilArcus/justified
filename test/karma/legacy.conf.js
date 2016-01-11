@@ -3,20 +3,20 @@ var commonConfig = require('./common.conf')
   , version
   , major
   , minor
-  , polyfills;
+  , polyfills
 
 /* eslint-disable no-magic-numbers */
 if (process.platform === 'win32') {
-  version = os.release().split('.');
-  major = parseInt(version[0], 10);
-  minor = parseInt(version[1], 10);
+  version = os.release().split('.')
+  major = parseInt(version[0], 10)
+  minor = parseInt(version[1], 10)
   if (major < 5 || (major === 5 && minor === 0)) {
     throw new Error(
       'Windows versions older than XP and IE versions older than 8 are' +
       'not supported.'
-    );
+    )
   } else if (major === 5 && minor === 1) {
-    console.log('Windows XP detected, configuring polyfills for IE 8');
+    console.log('Windows XP detected, configuring polyfills for IE 8')
     polyfills = [{
       pattern: 'setTimeout.js',
       watched: false
@@ -35,23 +35,23 @@ if (process.platform === 'win32') {
     }, {
       pattern:'node_modules/es5-shim/es5-sham.js',
       watched: false
-    }];
+    }]
   } else if (major === 6 && minor === 0) {
-    console.log('Windows Vista detected, configuring polyfills for IE 9');
+    console.log('Windows Vista detected, configuring polyfills for IE 9')
     polyfills = [{
       pattern: 'test/karma/setTimeout.js',
       watched: false
     }, {
       pattern: 'node_modules/document-register-element/build/document-register-element.max.js', // eslint-disable-line max-len
       watched: false
-    }];
+    }]
   } else {
     throw new Error(
       'Use Windows XP or Windows Vista to test legacy IE versions'
-    );
+    )
   }
 } else {
-  throw new Error('Can only test legacy IE versions on Windows');
+  throw new Error('Can only test legacy IE versions on Windows')
 }
 /* eslint-enable no-magic-numbers */
 
@@ -82,5 +82,5 @@ module.exports = function (config) {
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true,
     concurrency: commonConfig.concurrency
-  });
-};
+  })
+}

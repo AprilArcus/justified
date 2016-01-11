@@ -1,4 +1,4 @@
-var commonConfig = require('./common.conf');
+var commonConfig = require('./common.conf')
 
 module.exports = function (config) {
   config.set({
@@ -27,5 +27,5 @@ module.exports = function (config) {
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true,
     concurrency: commonConfig.concurrency
-  });
-};
+  })
+}

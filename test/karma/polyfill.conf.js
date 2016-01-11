@@ -7,15 +7,15 @@ var commonConfig = require('./common.conf')
     pattern: 'node_modules/document-register-element/build/document-register-element.max.js', // eslint-disable-line max-len
     watched: false
   }]
-  , browsers = ['Firefox'];
+  , browsers = ['Firefox']
 
 /* eslint-disable no-magic-numbers */
 // if (process.platform === 'darwin') browsers.push('Safari');
 if (process.platform === 'win32') {
-  version = os.release().split('.');
-  major = parseInt(version[0], 10);
-  minor = parseInt(version[1], 10);
-  if ((major === 6 && minor === 1) || major > 6) browsers.push('IE');
+  version = os.release().split('.')
+  major = parseInt(version[0], 10)
+  minor = parseInt(version[1], 10)
+  if ((major === 6 && minor === 1) || major > 6) browsers.push('IE')
 }
 /* eslint-enable no-magic-numbers */
 
@@ -46,5 +46,5 @@ module.exports = function (config) {
     // if true, Karma captures browsers, runs the tests and exits
     singleRun: true,
     concurrency: commonConfig.concurrency
-  });
-};
+  })
+}
