@@ -4,6 +4,6 @@
     "mocha": true
   },
   "rules": {
-    "max-nested-callbacks": [2, 2],
+    "max-nested-callbacks": [2, 3],
   }
 }

@@ -2,7 +2,10 @@ var path = require('path');
 
 module.exports = {
   devtool: 'cheap-module-source-map',
-  entry: './src/element.js',
+  entry: {
+    justified: './src/element.js',
+    test: './test/karma/entry.js'
+  },
   module: {
     preLoaders: [
       {
@@ -27,7 +30,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'justified.js'
+    filename: '[name].js'
   },
   plugins: [
   ],

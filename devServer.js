@@ -3,16 +3,16 @@ var express = require('express')
   , webpackDevMiddleware = require('webpack-dev-middleware')
   , config = require('./webpack.config')
   , port = 3000
-  , app = express();
+  , devServer = express();
 
-app.use(express.static(__dirname));
+devServer.use(express.static(__dirname));
 
-app.use(webpackDevMiddleware(webpack(config), {
+devServer.use(webpackDevMiddleware(webpack(config), {
   noInfo: true,
   publicPath: '/build/'
 }));
 
-app.listen(port, null, function (err) {
+module.exports = devServer.listen(port, null, function (err) {
   if (err) {
     console.log(err);
     return;

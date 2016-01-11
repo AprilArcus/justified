@@ -1,9 +1,7 @@
 /* eslint-env browser */
-/* eslint func-names: 0,
-          prefer-arrow-callback: 0,
-          max-params: 0,
-          no-magic-numbers: 0,
-          max-nested-callbacks: 0 */
+/* eslint max-params: 0,
+          max-nested-callbacks: 0,
+          no-invalid-this: 0 */
 
 (
   function (f) {
