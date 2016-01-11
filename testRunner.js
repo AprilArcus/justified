@@ -29,6 +29,7 @@ runAll(tasks, {
   devServerInstance.close();
   process.exit(0);
 }).catch(function (err) {
+  console.log('fail');
   console.log(err);
   devServerInstance.close();
   process.exit(1);
