@@ -13,8 +13,8 @@ if (process.platform === 'linux' || process.platform === 'darwin') {
 /* eslint-disable no-magic-numbers */
 if (process.platform === 'win32') {
   version = os.release().split('.');
-  major = version[0];
-  minor = version[1];
+  major = parseInt(version[0], 10);
+  minor = parseInt(version[1], 10);
   if (major < 6 || (major === 6 && minor === 0)) tasks.push('test:legacy');
 }
 /* eslint-enable no-magic-numbers */

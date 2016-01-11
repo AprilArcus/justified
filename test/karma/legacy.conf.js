@@ -8,8 +8,8 @@ var commonConfig = require('./common.conf')
 /* eslint-disable no-magic-numbers */
 if (process.platform === 'win32') {
   version = os.release().split('.');
-  major = version[0];
-  minor = version[1];
+  major = parseInt(version[0], 10);
+  minor = parseInt(version[1], 10);
   if (major < 5 || (major === 5 && minor === 0)) {
     throw new Error(
       'Windows versions older than XP and IE versions older than 8 are' +
@@ -50,6 +50,7 @@ if (process.platform === 'win32') {
       'Use Windows XP or Windows Vista to test legacy IE versions'
     );
   }
+} else {
   throw new Error('Can only test legacy IE versions on Windows');
 }
 /* eslint-enable no-magic-numbers */

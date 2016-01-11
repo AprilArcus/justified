@@ -13,8 +13,8 @@ var commonConfig = require('./common.conf')
 if (process.platform === 'darwin') browsers.push('Safari');
 if (process.platform === 'win32') {
   version = os.release().split('.');
-  major = version[0];
-  minor = version[1];
+  major = parseInt(version[0], 10);
+  minor = parseInt(version[1], 10);
   if ((major === 6 && minor === 1) || major > 6) browsers.push('IE');
 }
 /* eslint-enable no-magic-numbers */
