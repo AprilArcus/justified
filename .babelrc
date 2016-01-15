@@ -3,7 +3,7 @@
     "transform-es3-member-expression-literals",
     "transform-es3-property-literals",
     "transform-es5-property-mutators",
-    "transform-flow-strip-types"
+    "transform-class-properties"
   ],
-  "presets": ["es2015"]
+  "presets": ["es2015", "react"]
 }

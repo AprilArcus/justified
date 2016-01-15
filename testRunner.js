@@ -4,7 +4,10 @@ var os = require('os')
   , minor
   , devServerInstance = require('./devServer')
   , runAll = require('npm-run-all')
-  , tasks = ['test:polyfill'/* , 'test:native' */]
+  , tasks = [
+    'test:polyfill'
+    // 'test:native'
+  ]
 
 if (process.platform === 'linux' || process.platform === 'darwin') {
   // tasks.unshift('flow:check')

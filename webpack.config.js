@@ -1,30 +1,25 @@
-var path = require('path');
+var path = require('path')
 
 module.exports = {
   devtool: 'cheap-module-source-map',
   entry: {
     justified: './src/element.js',
-    test: './test/karma/entry.js'
+    'test/karma': './test/karma/entry.js',
+    'test/react': './test/react/entry.js'
   },
   module: {
     preLoaders: [
       {
         test: /\.js$/,
         loader: 'eslint',
-        include: [
-          path.resolve(__dirname, 'src'),
-          path.resolve(__dirname, 'test')
-        ]
+        exclude: path.resolve(__dirname, 'node_modules')
       }
     ],
     loaders: [
       {
         test: /\.js$/,
         loader: 'babel',
-        include: [
-          path.resolve(__dirname, 'src'),
-          path.resolve(__dirname, 'test')
-        ]
+        exclude: path.resolve(__dirname, 'node_modules')
       }
     ]
   },
@@ -43,4 +38,4 @@ module.exports = {
     failOnWarning: false,
     quiet: false
   }
-};
+}

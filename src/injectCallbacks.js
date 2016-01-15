@@ -4,8 +4,6 @@ declare class HTMLParagraphElement extends HTMLElement {
   align: string;
 }
 
-declare class HTMLJustifiedParagraphElement extends HTMLParagraphElement {}
-
 export const injectCallbacks = ({
   createdCallback,
   attachedCallback,
@@ -21,16 +19,18 @@ export const injectCallbacks = ({
     newAttributeValue: ?string,
     attributeNamespace: ?string
   ) => void
-}): HTMLJustifiedParagraphElement => document.registerElement(
-  'jus-ti-fied', {
-    extends: 'p',
-    prototype: Object.create(
-      HTMLParagraphElement.prototype, {
-        createdCallback: { value: createdCallback },
-        attachedCallback: { value: attachedCallback },
-        detachedCallback: { value: detachedCallback },
-        attributeChangedCallback: { value: attributeChangedCallback }
-      }
-    )
-  }
+}): void => {
+  window.HTMLJustifiedParagraphElement = document.registerElement(
+    'jus-ti-fied', {
+      extends: 'p',
+      prototype: Object.create(
+        HTMLParagraphElement.prototype, {
+          createdCallback: { value: createdCallback },
+          attachedCallback: { value: attachedCallback },
+          detachedCallback: { value: detachedCallback },
+          attributeChangedCallback: { value: attributeChangedCallback }
+        }
+      )
+    }
 )
+}

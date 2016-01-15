@@ -18,7 +18,7 @@ module.exports = {
       pattern: 'node_modules/babel-polyfill/dist/polyfill.min.js',
       watched: false
     },
-    'http://localhost:3000/build/test.js'
+    'http://localhost:3000/build/test/karma.js'
   ],
 
   // list of files to exclude

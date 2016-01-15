@@ -10,7 +10,7 @@ var commonConfig = require('./common.conf')
   , browsers = ['Firefox']
 
 /* eslint-disable no-magic-numbers */
-// if (process.platform === 'darwin') browsers.push('Safari');
+// if (process.platform === 'darwin') browsers.push('Safari')
 if (process.platform === 'win32') {
   version = os.release().split('.')
   major = parseInt(version[0], 10)
