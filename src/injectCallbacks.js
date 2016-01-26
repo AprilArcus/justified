@@ -1,9 +1,5 @@
 /* @flow */
 
-declare class HTMLParagraphElement extends HTMLElement {
-  align: string;
-}
-
 export const injectCallbacks = ({
   createdCallback,
   attachedCallback,
@@ -32,5 +28,5 @@ export const injectCallbacks = ({
         }
       )
     }
-)
+  )
 }

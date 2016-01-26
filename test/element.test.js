@@ -1,3 +1,12 @@
+import { injectCallbacks } from '../src/injectCallbacks'
+import * as callbacks from '../src/elementCallbacks'
+
+// set up spies
+Object.keys(callbacks).forEach((key) => {
+  callbacks[key] = sinon.spy(callbacks[key])
+})
+injectCallbacks(callbacks)
+
 describe('document.registerElement API', () => {
 
   let prototype
@@ -45,7 +54,7 @@ describe('document.registerElement API', () => {
 
   describe('attachedCallback()', () => {
 
-    before(done => {
+    before((done) => {
       prototype.attachedCallback.reset()
       document.body.appendChild(el)
       setTimeout(done)
@@ -69,7 +78,7 @@ describe('document.registerElement API', () => {
 
     describe('adding an attribute', () => {
 
-      before(done => {
+      before((done) => {
         el.setAttribute('class', 'fooClass')
         setTimeout(done)
       })
@@ -83,7 +92,7 @@ describe('document.registerElement API', () => {
 
     describe('altering an attribute', () => {
 
-      before(done => {
+      before((done) => {
         el.setAttribute('class', 'barClass')
         setTimeout(done)
       })
@@ -97,7 +106,7 @@ describe('document.registerElement API', () => {
 
     describe('removing an attribute', () => {
 
-      before(done => {
+      before((done) => {
         el.removeAttribute('class')
         setTimeout(done)
       })
@@ -117,7 +126,7 @@ describe('document.registerElement API', () => {
 
   describe('detachedCallback()', () => {
 
-    before(done => {
+    before((done) => {
       prototype.detachedCallback.reset()
       document.body.removeChild(el)
       setTimeout(done)

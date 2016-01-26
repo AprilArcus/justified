@@ -1,6 +1,14 @@
 {
+  "parserOptions": {
+    "ecmaVersion": 5,
+    "sourceType": "script",
+    "ecmaFeatures": {
+      "jsx": false
+    }
+  },
   "env": {
     "browser": false,
+    "es6": false,
     "node": true,
     "mocha": false
   },

@@ -9,17 +9,24 @@ module.exports = {
   },
   module: {
     preLoaders: [
-      {
-        test: /\.js$/,
-        loader: 'eslint',
-        exclude: path.resolve(__dirname, 'node_modules')
-      }
+      // {
+      //   test: /\.js$/,
+      //   loader: 'eslint',
+      //   exclude: path.resolve(__dirname, 'node_modules')
+      // }
     ],
     loaders: [
       {
         test: /\.js$/,
         loader: 'babel',
         exclude: path.resolve(__dirname, 'node_modules')
+      }
+    ],
+    postLoaders: [
+      {
+        test: /linebreaker\.js$/,
+        loader: 'transform?brfs',
+        include: path.resolve(__dirname, 'node_modules', 'linebreak', 'src')
       }
     ]
   },
