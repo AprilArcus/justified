@@ -3,9 +3,8 @@ var path = require('path')
 module.exports = {
   devtool: 'cheap-module-source-map',
   entry: {
-    justified: './src/element.js',
-    'test/karma': './test/karma/entry.js',
-    'test/react': './test/react/entry.js'
+    // justified: './src/element.js',
+    'test/karma': './test/karma/entry.js'
   },
   module: {
     preLoaders: [

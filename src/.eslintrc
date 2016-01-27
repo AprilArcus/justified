@@ -35,7 +35,7 @@
     "object-curly-spacing": 0,
     "babel/object-curly-spacing": [1, "always"],
     "arrow-parens": 0,
-    "babel/arrow-parens": [1, "always"],
+    "babel/arrow-parens": [1, "as-needed"],
     "generator-star-spacing": 0,
     "babel/generator-star-spacing": [1, "after"],
     "babel/object-shorthand": 1,

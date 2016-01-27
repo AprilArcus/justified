@@ -17,7 +17,7 @@ const regex = /([\t\n\f\r ]*)([^\t\n\f\r ]*)/g
 // will not be consolidated into a glue run , but will survive until
 // being parsed into a forced break by UAX 14.
 
-export const whiteSpace = function* whiteSpace ( // eslint-disable-line max-params
+export function* whiteSpace ( // eslint-disable-line max-params
   string: string,
   glue: Glue
   ): Generator<string|Glue, void, void> {

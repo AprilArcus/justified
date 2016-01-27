@@ -5,14 +5,10 @@ import Hypher from 'hypher'
 
 export class MemoizingHypher extends Hypher {
 
-  memos: {[key: string]: Array<string>};
+  memos: { [key: string]: Array<string> } = Object.create(null);
 
-  constructor (
-    language: LanguagePattern,
-    memos: { [key: string]: Array<string> }
-  ): void {
+  constructor (language: LanguagePattern): void {
     super(language)
-    this.memos = memos
   }
 
   hyphenate (string: string): Array<string> {
