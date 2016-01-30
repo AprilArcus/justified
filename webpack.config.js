@@ -25,6 +25,7 @@ module.exports = {
       {
         test: /linebreaker\.js$/,
         loader: 'transform?brfs',
+        // TODO: this should be a regex
         include: path.resolve(__dirname, 'node_modules', 'linebreak', 'src')
       }
     ]
