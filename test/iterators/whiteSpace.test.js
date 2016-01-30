@@ -3,14 +3,10 @@ import { Glue } from '../../src/formattingObjects'
 
 describe('splitting text on white space', () => {
 
-  let glue
-
-  before(() => {
-    glue = new Glue({
-      width: 0,
-      stretch: 0,
-      shrink: 0
-    })
+  const glue = new Glue({
+    width: 0,
+    stretch: 0,
+    shrink: 0
   })
 
   it('should split a string on spaces,', () => {

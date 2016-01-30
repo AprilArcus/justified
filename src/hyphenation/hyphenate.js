@@ -8,7 +8,7 @@ import intersperse from 'intersperse'
 
 const languages: { [key: string]: Hypher } = Object.create(null)
 
-export async function hyphenate (params: {
+export async function hyphenate(params: {
   language: string,
   string: string,
   hyphen: Penalty

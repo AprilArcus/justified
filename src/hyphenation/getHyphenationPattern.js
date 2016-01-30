@@ -1,31 +1,58 @@
 /* @flow */
 /* global LanguagePattern */
+/* eslint-env commonjs */
 
-import { evalQuarantined } from './evalQuarantined'
+const patterns: { [key: string]: LanguagePattern } = {
+  be: require('hyphenation.be'),
+  bn: require('hyphenation.bn'),
+  ca: require('hyphenation.ca'),
+  cs: require('hyphenation.cs'),
+  da: require('hyphenation.da'),
+  de: require('hyphenation.de'),
+  'el-monoton': require('hyphenation.el-monoton'),
+  'el-polyton': require('hyphenation.el-polyton'),
+  'en-gb': require('hyphenation.en-gb'),
+  'en-us': require('hyphenation.en-us'),
+  es: require('hyphenation.es'),
+  fi: require('hyphenation.fi'),
+  fr: require('hyphenation.fr'),
+  grc: require('hyphenation.grc'),
+  gu: require('hyphenation.gu'),
+  hi: require('hyphenation.hi'),
+  hu: require('hyphenation.hu'),
+  hy: require('hyphenation.hy'),
+  it: require('hyphenation.it'),
+  kn: require('hyphenation.kn'),
+  la: require('hyphenation.la'),
+  lt: require('hyphenation.lt'),
+  lv: require('hyphenation.lv'),
+  ml: require('hyphenation.ml'),
+  'nb-no': require('hyphenation.nb-no'),
+  nl: require('hyphenation.nl'),
+  or: require('hyphenation.or'),
+  pa: require('hyphenation.pa'),
+  pl: require('hyphenation.pl'),
+  pt: require('hyphenation.pt'),
+  ru: require('hyphenation.ru'),
+  sk: require('hyphenation.sk'),
+  sl: require('hyphenation.sl'),
+  sv: require('hyphenation.sv'),
+  ta: require('hyphenation.ta'),
+  te: require('hyphenation.te'),
+  tr: require('hyphenation.tr'),
+  uk: require('hyphenation.uk')
+}
 
-const OK = 200
+patterns.en = patterns['en-us']
+patterns.el = patterns['el-monoton']
+patterns.nb = patterns['nb-no']
+patterns.no = patterns['nb-no']
 
-export function getHyphenationPattern (
-  languageCode: string
-  ): Promise<LanguagePattern> {
+const NOT_FOUND = 404
 
-  const url =
-    `https://npmcdn.com/hyphenation.${languageCode}/lib/${languageCode}.js`
-
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest()
-    xhr.open('GET', url, true)
-    xhr.onload = function onload (progressEvent) {
-      if (this.status === OK) {
-        resolve(evalQuarantined(xhr.responseText))
-      } else {
-        reject({ status: this.status, statusText: xhr.statusText })
-      }
-    }
-    xhr.onerror = function onerror (progressEvent) {
-      reject({ status: this.status, statusText: xhr.statusText })
-    }
-    xhr.send()
-  })
-
+export function getHyphenationPattern(
+  language: string
+): Promise<LanguagePattern> {
+  if (patterns[language]) return Promise.resolve(patterns[language])
+  return Promise.reject({ status: NOT_FOUND })
 }
