@@ -17,19 +17,20 @@ function hyphenateSync<T>(
 }
 
 export function curriedHyphenator<T>(
-  language: string
-): Promise<(hyphen: T) => (string: string) => Array<string|T>> {
+  language: string,
+  hyphen: T
+): Promise<(string: string) => Array<string|T>> {
 
   let h = languages[language]
 
   if (h) {
-    return Promise.resolve(hyphen => string => hyphenateSync(h, hyphen, string))
+    return Promise.resolve(string => hyphenateSync(h, hyphen, string))
   }
 
   return getHyphenationPattern(language).then(pattern => {
     h = new Hypher(pattern)
     languages[language] = h
-    return Promise.resolve(hyphen => string => hyphenateSync(h, hyphen, string)) // eslint-disable-line max-nested-callbacks
+    return Promise.resolve(string => hyphenateSync(h, hyphen, string)) // eslint-disable-line max-nested-callbacks
   })
 
 }
