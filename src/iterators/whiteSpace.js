@@ -1,3 +1,5 @@
+/* @flow */
+
 import { Glue } from '../formattingObjects'
 
 // https://www.w3.org/TR/CSS2/text.html#propdef-white-space
@@ -17,22 +19,26 @@ const regex = /([\t\n\f\r ]*)([^\t\n\f\r ]*)/g
 // will not be consolidated into a glue run , but will survive until
 // being parsed into a forced break by UAX 14.
 
-export function* whiteSpace ( // eslint-disable-line max-params
+export function whiteSpace(params: {
   string: string,
   glue: Glue
-  ): Generator<string|Glue, void, void> {
+}): Array<string|Glue> {
+
+  const { string, glue } = params
 
   let match
+  const out = []
 
   do {
     let whitespace // eslint-disable-line prefer-const
     let segment // eslint-disable-line prefer-const
 
     [match, whitespace, segment] = regex.exec(string)
-    if (whitespace) yield glue
-    if (segment) yield segment
+    if (whitespace) out.push(glue)
+    if (segment) out.push(segment)
   } while (match)
 
   regex.lastIndex = 0
+  return out
 
 }

@@ -1,18 +1,12 @@
 /* @flow */
-/* eslint func-style: [2, "declaration"],
-          no-var: 0,
-          no-cond-assign: 0
-*/
 
-const SHOW_TEXT = 4 // = NodeFilter.SHOW_TEXT
+export function textNodes(root: HTMLParagraphElement): Array<Text> {
 
-export function textNodes (root: HTMLParagraphElement): Array<Text> {
+  const iterator = document.createNodeIterator(root, NodeFilter.SHOW_TEXT)
+  const nodes = []
+  let node
 
-  var iterator = document.createNodeIterator(root, SHOW_TEXT)
-    , nodes = []
-    , node
-
-  while (node = iterator.nextNode()) nodes.push(node)
+  while (node = iterator.nextNode()) nodes.push(node) // eslint-disable-line no-cond-assign
   return nodes
 
 }

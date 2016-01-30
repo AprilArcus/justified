@@ -2,12 +2,8 @@ import { textNodes } from '../../src/iterators/textNodes'
 
 describe('iterating over text nodes', () => {
 
-  let p
-
-  before(() => {
-    p = document.createElement('p')
-    p.innerHTML = 'Lorem <em>ipsum dolor <strong>sit amet</strong></em>, consectetur adipiscing elit' // eslint-disable-line max-len
-  })
+  const p = document.createElement('p')
+  p.innerHTML = 'Lorem <em>ipsum dolor <strong>sit amet</strong></em>, consectetur adipiscing elit' // eslint-disable-line max-len
 
   it('should find only text nodes', () => {
     for (const node of textNodes(p)) {
@@ -18,14 +14,14 @@ describe('iterating over text nodes', () => {
 
   it('should find every text node', () => {
     expect(
-      Array.from(textNodes(p)).map((node) => node.data).join('')
+      textNodes(p).map(node => node.data).join('')
     ).to.equal(p.textContent)
   })
 
-  // it('every text node should be mounted in the DOM', () => {
-  //   for (const node of textNodes(p)) {
-  //     expect(node.parentNode).to.be.ok()
-  //   }
-  // })
+  it('every text node should be mounted in the DOM', () => {
+    for (const node of textNodes(p)) {
+      expect(node.parentNode).to.be.ok()
+    }
+  })
 
 })

@@ -7,7 +7,7 @@ import { EOL_GLUE, EOL_PENALTY, FREE_BREAK } from '../formattingObjects'
 
 const SOFT_HYPHEN = '\u{00AD}'
 
-export function uax14 ( // eslint-disable-line max-params
+export function uax14( // eslint-disable-line max-params
   string: string,
   hyphenator: (string: string, hyphen: Penalty) => Array<string|Penalty|Glue>,
   hyphen: Penalty
