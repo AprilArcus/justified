@@ -1,4 +1,4 @@
-import { whiteSpace } from '../../src/iterators/whiteSpace'
+import { whiteSpace } from '../../src/span/whiteSpace'
 
 describe('splitting text on white space', () => {
 

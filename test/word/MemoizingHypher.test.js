@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-import { MemoizingHypher } from '../../src/hyphenation/MemoizingHypher'
+import { MemoizingHypher } from '../../src/word/MemoizingHypher'
 import en from 'hyphenation.en-us'
 
 describe('MemoizingHypher', () => {
