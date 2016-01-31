@@ -1,7 +1,5 @@
 /* @flow */
 
-import { Glue } from '../formattingObjects'
-
 // https://www.w3.org/TR/CSS2/text.html#propdef-white-space
 
 // The built in \s and \b character classes match a variety of non-breaking
@@ -19,23 +17,27 @@ const regex = /([\t\n\f\r ]*)([^\t\n\f\r ]*)/g
 // will not be consolidated into a glue run , but will survive until
 // being parsed into a forced break by UAX 14.
 
-export function whiteSpace(params: {
+export function whiteSpace<GluePlaceHolderT, ProcessedWordT>(
   string: string,
-  glue: Glue
-}): Array<string|Glue> {
-
-  const { string, glue } = params
+  glue: GluePlaceHolderT,
+  split: (word: string) => Array<ProcessedWordT>
+): Array<GluePlaceHolderT|ProcessedWordT> {
 
   let match
   const out = []
 
   do {
     let whitespace // eslint-disable-line prefer-const
-    let segment // eslint-disable-line prefer-const
+    let word // eslint-disable-line prefer-const
 
-    [match, whitespace, segment] = regex.exec(string)
+    [match, whitespace, word] = regex.exec(string)
     if (whitespace) out.push(glue)
-    if (segment) out.push(segment)
+    if (word) {
+      const syllables = split(word)
+      for (let i = 0, length = syllables.length; i < length; i++) {
+        out.push(syllables[i])
+      }
+    }
   } while (match)
 
   regex.lastIndex = 0

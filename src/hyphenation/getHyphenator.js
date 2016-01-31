@@ -10,16 +10,16 @@ const languages: { [key: string]: Hypher } = Object.create(null)
 function hyphenateSync<T>(
   h: Hypher,
   hyphen: T,
-  string: string,
+  string: string
 ): Array<string|T> {
   const syllables = h.hyphenate(string)
   return intersperse(syllables, hyphen)
 }
 
-export function curriedHyphenator<T>(
+export function getHyphenator<T>(
   language: string,
   hyphen: T
-): Promise<(string: string) => Array<string|T>> {
+): Promise<(string: string) => Array<string|T>|string> {
 
   let h = languages[language]
 
@@ -30,7 +30,7 @@ export function curriedHyphenator<T>(
   return getHyphenationPattern(language).then(pattern => {
     h = new Hypher(pattern)
     languages[language] = h
-    return Promise.resolve(string => hyphenateSync(h, hyphen, string)) // eslint-disable-line max-nested-callbacks
-  })
+    return string => hyphenateSync(h, hyphen, string)
+  }).catch(_ => string => string)
 
 }
