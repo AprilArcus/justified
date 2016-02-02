@@ -2,15 +2,15 @@
 
 import UAX14 from 'linebreak'
 import { EOL_GLUE, EOL_PENALTY, FREE_BREAK } from '../formattingObjects'
+import { hyphenPlaceholder } from '../utils/placeholders'
 
 const SOFT_HYPHEN = '\u{00AD}'
 
-export function uax14<HyphenPlaceholderT>( // eslint-disable-line max-params
-  hyphen: HyphenPlaceholderT,
-  hyphenator: (string: string) => Array<string|HyphenPlaceholderT>
+export function uax14( // eslint-disable-line max-params
+  hyphenator: (string: string) => Array<string|typeof hyphenPlaceholder>
 ): (string: string) => Array<
   string|
-  HyphenPlaceholderT|
+  typeof hyphenPlaceholder|
   typeof EOL_GLUE|
   typeof EOL_PENALTY|
   typeof FREE_BREAK
@@ -26,10 +26,10 @@ export function uax14<HyphenPlaceholderT>( // eslint-disable-line max-params
     // automatic hyphenation algorithm specified by the caller
     if (thisBreak.position === string.length) {
       return (
-        hyphenator(string, hyphen):
+        hyphenator(string, hyphenPlaceholder):
         Array<
           string|
-          HyphenPlaceholderT|
+          typeof hyphenPlaceholder|
           typeof EOL_GLUE|
           typeof EOL_PENALTY|
           typeof FREE_BREAK
@@ -47,7 +47,7 @@ export function uax14<HyphenPlaceholderT>( // eslint-disable-line max-params
         segments.push(EOL_PENALTY)
       } else if (thisBreak !== null) {
         if (string[lastBreak.position - 1] === SOFT_HYPHEN) {
-          segments.push(hyphen)
+          segments.push(hyphenPlaceholder)
         } else {
           segments.push(FREE_BREAK)
         }
