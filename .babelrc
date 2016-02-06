@@ -10,7 +10,7 @@
         ["transform-es2015-classes", {"loose": true}],
         ["transform-es2015-computed-properties", {"loose": true}],
         ["transform-es2015-destructuring", {"loose": true}],
-        // ["transform-es2015-for-of", {"loose": false}],
+        ["transform-es2015-for-of", {"loose": true}],
         "transform-es2015-function-name",
         "transform-es2015-literals",
         ["transform-es2015-modules-commonjs", {"loose": true}],
