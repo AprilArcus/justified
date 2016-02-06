@@ -2,8 +2,10 @@ import { injectCallbacks } from '../src/injectCallbacks'
 import * as callbacks from '../src/elementCallbacks'
 
 // set up spies
-Object.keys(callbacks).forEach((key) => {
-  callbacks[key] = sinon.spy(callbacks[key])
+Object.keys(callbacks).forEach(key => {
+  if (typeof callbacks[key] === 'function') {
+    callbacks[key] = sinon.spy(callbacks[key])
+  }
 })
 injectCallbacks(callbacks)
 
