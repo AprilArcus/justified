@@ -17,7 +17,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel',
+        loaders: ['es3ify', 'babel'],
         exclude: path.resolve(__dirname, 'node_modules')
       }
     ],
