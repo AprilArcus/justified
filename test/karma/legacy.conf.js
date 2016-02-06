@@ -24,6 +24,9 @@ if (process.platform === 'win32') {
       pattern: 'node_modules/ie8/build/ie8.max.js',
       watched: false
     }, {
+      pattern: 'node_modules/dom4/build/dom4.max.js',
+      watched: false
+    }, {
       pattern: 'node_modules/document-register-element/build/dre-ie8-upfront-fix.max.js', // eslint-disable-line max-len
       watched: false
     }, {

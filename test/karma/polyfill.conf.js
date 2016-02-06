@@ -3,10 +3,14 @@ var commonConfig = require('./common.conf')
   , version
   , major
   , minor
-  , polyfills = [{
-    pattern: 'node_modules/document-register-element/build/document-register-element.max.js', // eslint-disable-line max-len
-    watched: false
-  }]
+  , polyfills = [
+      {
+        pattern: 'node_modules/dom4/build/dom4.max.js',
+        watched: false
+      }, {
+        pattern: 'node_modules/document-register-element/build/document-register-element.max.js', // eslint-disable-line max-len
+        watched: false
+      }]
   , browsers = ['Firefox']
 
 /* eslint-disable no-magic-numbers */
