@@ -2,7 +2,7 @@
 /* global LanguagePattern */
 /* eslint-env commonjs */
 
-import { MemoizingHypher as Hypher } from './MemoizingHypher'
+// simulate making fetch() calls to a JSON server
 
 const patterns: { [key: string]: LanguagePattern } = {
   be: require('hyphenation.be'),
@@ -52,9 +52,9 @@ patterns.no = patterns['nb-no']
 
 const NOT_FOUND = 404
 
-export function hypherPromise(
+export function languagePatternPromise(
   language: string
-): Promise<Hypher> {
-  if (patterns[language]) return Promise.resolve(new Hypher(patterns[language]))
+): Promise<LanguagePattern> {
+  if (patterns[language]) return Promise.resolve(patterns[language])
   return Promise.reject({ status: NOT_FOUND })
 }

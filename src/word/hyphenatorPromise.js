@@ -2,12 +2,12 @@
 /* eslint-env commonjs */
 
 import { MemoizingHypher as Hypher } from './MemoizingHypher'
-import { hypherPromise } from './hypherPromise'
+import { languagePatternPromise } from './languagePatternPromise'
 import { intersperse } from '../utils/intersperse'
 import { id } from '../utils/id'
 import { hyphenPlaceholder } from '../utils/placeholders'
 
-const languages: { [key: string]: Promise<Hypher> } = Object.create(null)
+const languages = Object.create(null)
 
 export function hyphenatorPromise(
   language: string
@@ -16,17 +16,16 @@ export function hyphenatorPromise(
   let promise = languages[language]
 
   if (!promise) {
-    promise = hypherPromise(language)
+    promise =
+      languagePatternPromise(language)
+      .then(pattern => {
+        const h = new Hypher(pattern)
+        return string => intersperse(h.hyphenate(string), hyphenPlaceholder)
+      })
+      .catch(() => id)
     languages[language] = promise
   }
 
-  return (
-    promise
-      .then(h => string => {
-        const syllables = h.hyphenate(string)
-        return intersperse(syllables, hyphenPlaceholder)
-      })
-      .catch(() => id)
-  )
+  return promise
 
 }

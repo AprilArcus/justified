@@ -11,8 +11,7 @@ let gcs
 // truthy we conclude that it has been polyfilled.
 // https://gist.github.com/jdalton/5e34d890105aca44399f#gistcomment-1283831
 if (!window.getComputedStyle || window.getComputedStyle.prototype) {
-  // type annotation copied from flow/lib/dom.js
-  gcs = function getComputedStyle(elt: Element, pseudoElt?: string): any {
+  gcs = function getComputedStyle(elt: HTMLElement, pseudoElt?: string): any {
     return { width: pseudoElt ? 0 : elt.offsetWidth } // eslint-disable-line no-ternary
   }
 } else {

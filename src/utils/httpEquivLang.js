@@ -3,7 +3,8 @@ let searched = false
 let cached
 
 // for IE8
-const ELEMENT_NODE = window.Node && Node.ELEMENT_NODE || 1
+// const ELEMENT_NODE = window.Node && Node.ELEMENT_NODE || 1
+const ELEMENT_NODE = Node.ELEMENT_NODE
 
 export function httpEquivLang(): ?string {
   if (!searched) {

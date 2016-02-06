@@ -1,6 +1,6 @@
 import { httpEquivLang } from '../utils/httpEquivLang'
 
-export function language(textNode: Text): string {
+export function language(textNode) {
   let n = textNode
   while (n = n.parentNode) { // eslint-disable-line no-cond-assign
     const lang = n.lang
