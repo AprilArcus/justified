@@ -38,8 +38,8 @@ describe('flatten()', () => {
   })
 
   it('...or other primitives', () => {
-    expect(flatten([true, false, undefined, null]))
-      .to.eql([true, false, undefined, null])
+    expect(flatten([true, false, null]))
+      .to.eql([true, false, null])
   })
 
   it('returns an flattened array given an array of arrays', () => {
@@ -66,9 +66,11 @@ describe('flatten()', () => {
       .to.eql(['a', 'b', 'c'])
   })
 
-  it('distinguishes undefined from a hole in an inner array', () => {
-    expect(flatten([ ['a', undefined, 'b', , 'c'] ]))  // eslint-disable-line no-sparse-arrays
-      .to.eql(['a', undefined, 'b', 'c'])
-  })
+  if (0 in [undefined]) {
+    it('distinguishes undefined from a hole in an inner array', () => {
+      expect(flatten([ ['a', undefined, 'b', , 'c'] ]))  // eslint-disable-line no-sparse-arrays
+        .to.eql(['a', undefined, 'b', 'c'])
+    })
+  }
 
 })
