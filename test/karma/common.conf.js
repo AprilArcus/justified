@@ -15,7 +15,7 @@ module.exports = {
   // list of files / patterns to load in the browser
   files: [
     {
-      pattern: 'node_modules/babel-polyfill/dist/polyfill.min.js',
+      pattern: 'node_modules/babel-polyfill/dist/polyfill.js',
       watched: false
     },
     'http://localhost:3000/build/test/karma.js'

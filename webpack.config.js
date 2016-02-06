@@ -4,7 +4,8 @@ module.exports = {
   devtool: 'cheap-module-source-map',
   entry: {
     // justified: './src/element.js',
-    'test/karma': './test/karma/entry.js'
+    'test/karma': './test/karma/entry.js',
+    'test/dom-node-iterator-shim': './test/karma/dom-node-iterator-shim.js'
   },
   module: {
     preLoaders: [
