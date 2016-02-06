@@ -18,14 +18,16 @@ describe('document.registerElement API', () => {
 
     it('should be set as a property on `window`', () => {
       expect(window.HTMLJustifiedParagraphElement).to.be.a('function')
-    })
+    });
 
-    it('should be a constructor when invoked with "new"', () => {
+    (Object.__proto__ ? it : it.skip)( // eslint-disable-line no-ternary, no-proto
+    'should be a constructor when invoked with "new"', () => {
       expect(new window.HTMLJustifiedParagraphElement())
         .to.be.a(window.HTMLJustifiedParagraphElement)
-    })
+    });
 
-    it('...as well as document.createElement()', () => {
+    (Object.__proto__ ? it : it.skip)( // eslint-disable-line no-ternary, no-proto
+    '...as well as document.createElement()', () => {
       expect(document.createElement('p', 'jus-ti-fied'))
         .to.be.a(window.HTMLJustifiedParagraphElement)
     })
