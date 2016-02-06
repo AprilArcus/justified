@@ -1,8 +1,9 @@
 const headNodes = document.head.childNodes
 let searched = false
 let cached
-// for IE8, where window.Node is undefined
-const ELEMENT_NODE = Node && Node.ELEMENT_NODE || 1
+
+// for IE8
+const ELEMENT_NODE = window.Node && Node.ELEMENT_NODE || 1
 
 export function httpEquivLang(): ?string {
   if (!searched) {

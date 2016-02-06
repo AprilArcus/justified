@@ -1,7 +1,7 @@
 /* @flow */
 
-// for IE8, where we can't count on NodeFilter being polyfilled
-const SHOW_TEXT = NodeFilter && NodeFilter.SHOW_TEXT || 4 // eslint-disable-line no-magic-numbers
+// for IE8
+const SHOW_TEXT = window.NodeFilter && NodeFilter.SHOW_TEXT || 4 // eslint-disable-line no-magic-numbers
 
 export function textNodes(root: HTMLParagraphElement): Array<Text> {
 
