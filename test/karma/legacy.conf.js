@@ -18,7 +18,7 @@ if (process.platform === 'win32') {
   } else if (major === 5 && minor === 1) {
     console.log('Windows XP detected, configuring polyfills for IE 8')
     polyfills = [{
-      pattern: 'setTimeout.js',
+      pattern: 'test/karma/setTimeout.js',
       watched: false
     }, {
       pattern: 'node_modules/ie8/build/ie8.max.js',
@@ -33,10 +33,13 @@ if (process.platform === 'win32') {
       pattern: 'node_modules/document-register-element/build/document-register-element.max.js', // eslint-disable-line max-len
       watched: false
     }, {
-      pattern:'node_modules/es5-shim/es5-shim.js',
+      pattern: 'node_modules/es5-shim/es5-shim.js',
       watched: false
     }, {
-      pattern:'node_modules/es5-shim/es5-sham.js',
+      pattern: 'node_modules/es5-shim/es5-sham.js',
+      watched: false
+    }, {
+      pattern: 'node_modules/node-iterator-shim/dist/node-iterator-shim.js',
       watched: false
     }]
   } else if (major === 6 && minor === 0) {

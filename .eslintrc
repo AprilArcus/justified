@@ -41,7 +41,6 @@
     "no-case-declarations": 2,
     "no-div-regex": 1,
     "no-else-return": 1,
-    "no-empty-label": 1,
     "no-empty-pattern": 2,
     "no-eq-null": 2,
     "no-eval": 2,
