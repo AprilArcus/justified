@@ -64,13 +64,12 @@ describe('flatten()', () => {
   it('skips a hole in the outer array', () => {
     expect(flatten(['a', , 'b', , 'c'])) // eslint-disable-line no-sparse-arrays
       .to.eql(['a', 'b', 'c'])
-  })
+  });
 
-  if (0 in [undefined]) {
-    it('distinguishes undefined from a hole in an inner array', () => {
-      expect(flatten([ ['a', undefined, 'b', , 'c'] ]))  // eslint-disable-line no-sparse-arrays
-        .to.eql(['a', undefined, 'b', 'c'])
-    })
-  }
+  ([undefined].hasOwnProperty(0) ? it : it.skip)( // eslint-disable-line no-ternary
+  'distinguishes undefined from a hole in an inner array', () => {
+    expect(flatten([ ['a', undefined, 'b', , 'c'] ]))  // eslint-disable-line no-sparse-arrays
+      .to.eql(['a', undefined, 'b', 'c'])
+  })
 
 })
