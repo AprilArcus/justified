@@ -1,5 +1,5 @@
 import uax14 from '../../src/span/uax14'
-import id from '../../src/utils/id'
+import pureArray from '../../src/utils/pureArray'
 import {
   hyphenPlaceholder,
   freeBreakPlaceholder,
@@ -9,7 +9,7 @@ import {
 
 describe('splitting text on UAX 14 break opportunities', () => {
 
-  const hyphenator = sinon.spy(id)
+  const hyphenator = sinon.spy(pureArray)
   const breaker = uax14(hyphenator)
 
   describe('when there are no break opportunities', () => {

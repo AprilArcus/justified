@@ -4,7 +4,7 @@
 import { MemoizingHypher as Hypher } from './MemoizingHypher'
 import languagePatternPromise from './languagePatternPromise'
 import intersperse from '../utils/intersperse'
-import id from '../utils/id'
+import pureArray from '../utils/pureArray'
 import type { Placeholder } from '../utils/placeholders'
 import { hyphenPlaceholder } from '../utils/placeholders'
 
@@ -12,7 +12,7 @@ const languages = Object.create(null)
 
 export default function hyphenatorPromise (
   language: string
-): Promise<(string: string) => string|Array<string|Placeholder>> {
+): Promise<(string: string) => Array<string|Placeholder>> {
 
   let promise = languages[language]
 
@@ -23,7 +23,7 @@ export default function hyphenatorPromise (
         const h = new Hypher(pattern)
         return string => intersperse(h.hyphenate(string), hyphenPlaceholder)
       })
-      .catch(() => id)
+      .catch(() => pureArray)
     languages[language] = promise
   }
 

@@ -11,8 +11,8 @@ import {
 const SOFT_HYPHEN = '\u{00AD}'
 
 export default function uax14 (
-  hyphenator: (string: string) => string|Array<string|Placeholder>
-): (string: string) => string|Array<string|Placeholder> {
+  hyphenator: (string: string) => Array<string|Placeholder>
+): (string: string) => Array<string|Placeholder> {
 
   return string => {
 

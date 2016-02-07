@@ -39,10 +39,10 @@ describe('hyphenatorPromise()', () => {
       })
     })
 
-    it('returns the original string', done => {
+    it('returns the original string wrapped in an array', done => {
       hyphenatorPromise('foo').then(hyphenate => {
         expect(hyphenate('enjambment'))
-          .to.eql('enjambment')
+          .to.eql(['enjambment'])
         done()
       })
     })
