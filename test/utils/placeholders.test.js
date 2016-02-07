@@ -14,6 +14,18 @@ describe('placeholders', () => {
     expect(placeholders).to.have.property('hyphenPlaceholder')
   })
 
+  it('has a `freeBreakPlaceholder` key', () => {
+    expect(placeholders).to.have.property('freeBreakPlaceholder')
+  })
+
+  it('has a `eolGluePlaceholder` key', () => {
+    expect(placeholders).to.have.property('eolGluePlaceholder')
+  })
+
+  it('has a `eolPenaltyPlaceholder` key', () => {
+    expect(placeholders).to.have.property('eolPenaltyPlaceholder')
+  })
+
   it('has no collisions', () => {
     Object.keys(placeholders).forEach(key => {
       Object.keys(placeholders)

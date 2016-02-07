@@ -1,20 +1,18 @@
 /* @flow */
 
 import UAX14 from 'linebreak'
-import { EOL_GLUE, EOL_PENALTY, FREE_BREAK } from '../formattingObjects'
-import { hyphenPlaceholder } from '../utils/placeholders'
-
+import type { Placeholder } from '../utils/placeholders'
+import {
+  hyphenPlaceholder,
+  freeBreakPlaceholder,
+  eolGluePlaceholder,
+  eolPenaltyPlaceholder
+} from '../utils/placeholders'
 const SOFT_HYPHEN = '\u{00AD}'
 
 export default function uax14 (
-  hyphenator: (string: string) => Array<string|typeof hyphenPlaceholder>
-): (string: string) => Array<
-  string|
-  typeof hyphenPlaceholder|
-  typeof EOL_GLUE|
-  typeof EOL_PENALTY|
-  typeof FREE_BREAK
-> {
+  hyphenator: (string: string) => string|Array<string|Placeholder>
+): (string: string) => string|Array<string|Placeholder> {
 
   return string => {
 
@@ -25,16 +23,7 @@ export default function uax14 (
     // if and only if we can't find any UAX14 breaks, we defer to a
     // automatic hyphenation algorithm specified by the caller
     if (thisBreak.position === string.length) {
-      return (
-        hyphenator(string, hyphenPlaceholder):
-        Array<
-          string|
-          typeof hyphenPlaceholder|
-          typeof EOL_GLUE|
-          typeof EOL_PENALTY|
-          typeof FREE_BREAK
-        >
-      )
+      return hyphenator(string)
     }
 
     const segments = []
@@ -43,13 +32,13 @@ export default function uax14 (
       lastBreak = thisBreak
       thisBreak = breaker.nextBreak()
       if (lastBreak.required) {
-        segments.push(EOL_GLUE)
-        segments.push(EOL_PENALTY)
+        segments.push(eolGluePlaceholder)
+        segments.push(eolPenaltyPlaceholder)
       } else if (thisBreak !== null) {
         if (string[lastBreak.position - 1] === SOFT_HYPHEN) {
           segments.push(hyphenPlaceholder)
         } else {
-          segments.push(FREE_BREAK)
+          segments.push(freeBreakPlaceholder)
         }
       }
     }

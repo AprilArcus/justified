@@ -1,162 +1,225 @@
-// import uax14 from '../../src/iterators/uax14'
-// import {
-//   Penalty,
-//   EOL_GLUE,
-//   EOL_PENALTY,
-//   FREE_BREAK
-// } from '../../src/formattingObjects'
+import uax14 from '../../src/span/uax14'
+import id from '../../src/utils/id'
+import {
+  hyphenPlaceholder,
+  freeBreakPlaceholder,
+  eolGluePlaceholder,
+  eolPenaltyPlaceholder
+} from '../../src/utils/placeholders'
 
-// describe('splitting text on UAX 14 break opportunities', () => {
+describe('splitting text on UAX 14 break opportunities', () => {
 
-//   const hyphenator = sinon.spy()
-//   const hyphen = new Penalty({
-//     width: 0,
-//     penalty: 0,
-//     flagged: false,
-//     value: '-',
-//     kern: 0
-//   })
+  const hyphenator = sinon.spy(id)
+  const breaker = uax14(hyphenator)
 
-//   // describe('when there are no break opportunities', () => {
+  describe('when there are no break opportunities', () => {
 
-//   //   before(() => {
-//   //     hyphenator.reset()
-//   //     Array.from(uax14('hello', hyphenator, hyphen))
-//   //   })
+    it('should yield to the hyphenator callback', () => {
+      hyphenator.reset()
+      breaker('hello')
+      expect(hyphenator).to.be.called()
+    })
 
-//   //   it.skip('should yield to the hyphenator callback', () => {
-//   //     expect(hyphenator).to.be.called()
-//   //   })
+  })
 
-//   // })
+  describe('when there are initial break opportunities', () => {
 
-//   describe('when there are initial break opportunities', () => {
+    it('should not yield to the hyphenator callback', () => {
+      hyphenator.reset()
+      breaker('-world')
+      expect(hyphenator).to.be.notCalled()
+    })
 
-//     before(() => {
-//       hyphenator.reset()
-//       Array.from(uax14('-world', hyphenator, hyphen))
-//     })
+    it.skip('should not break after a leading hard hyphen', () => {
+      expect(breaker('-world'))
+        .to.eql([
+          '-world'
+        ])
+    })
 
-//     it('should not yield to the hyphenator callback', () => {
-//       expect(hyphenator).to.be.notCalled()
-//     })
+    it('should insert a penalty object after a soft hyphen', () => {
+      expect(breaker('\u{00AD}world'))
+        .to.eql([
+          '\u{00AD}',
+          hyphenPlaceholder,
+          'world'
+        ])
+    })
 
-//     it.skip('should not break after a leading hard hyphen', () => {
-//       expect(Array.from(uax14('-world', hyphenator, hyphen)))
-//         .to.eql(['-world'])
-//     })
+    it('should force a break after a line tabulation', () => {
+      expect(breaker('\vworld'))
+        .to.eql([
+          '\v',
+          eolGluePlaceholder,
+          eolPenaltyPlaceholder,
+          'world'
+        ])
+    })
 
-//     it('should insert a penalty object after a soft hyphen', () => {
-//       expect(Array.from(uax14('\u{00AD}world', hyphenator, hyphen)))
-//         .to.eql(['\u{00AD}', hyphen, 'world'])
-//     })
+    it('should force a break after a form feed', () => {
+      expect(breaker('\fworld'))
+        .to.eql([
+          '\f',
+          eolGluePlaceholder,
+          eolPenaltyPlaceholder,
+          'world'
+        ])
+    })
 
-//     it('should force a break after a line tabulation', () => {
-//       expect(Array.from(uax14('\vworld', hyphenator, hyphen)))
-//         .to.eql(['\v', EOL_GLUE, EOL_PENALTY, 'world'])
-//     })
+    it('should force a break after a line separator', () => {
+      expect(breaker('\u{2028}world'))
+        .to.eql([
+          '\u{2028}',
+          eolGluePlaceholder,
+          eolPenaltyPlaceholder,
+          'world'
+        ])
+    })
 
-//     it('should force a break after a form feed', () => {
-//       expect(Array.from(uax14('\fworld', hyphenator, hyphen)))
-//         .to.eql(['\f', EOL_GLUE, EOL_PENALTY, 'world'])
-//     })
+    it('should force a break after a paragraph separator', () => {
+      expect(breaker('\u{2029}world'))
+        .to.eql([
+          '\u{2029}',
+          eolGluePlaceholder,
+          eolPenaltyPlaceholder,
+          'world'
+        ])
+    })
 
-//     it('should force a break after a line separator', () => {
-//       expect(Array.from(uax14('\u{2028}world', hyphenator, hyphen)))
-//         .to.eql(['\u{2028}', EOL_GLUE, EOL_PENALTY, 'world'])
-//     })
+  })
 
-//     it('should force a break after a paragraph separator', () => {
-//       expect(Array.from(uax14('\u{2029}world', hyphenator, hyphen)))
-//         .to.eql(['\u{2029}', EOL_GLUE, EOL_PENALTY, 'world'])
-//     })
+  describe('when there are medial break opportunities', () => {
 
-//   })
+    it('should not yield to the hyphenator callback', () => {
+      hyphenator.reset()
+      breaker('hello-world')
+      expect(hyphenator).to.be.notCalled()
+    })
 
-//   describe('when there are medial break opportunities', () => {
+    it('should optionally break after a hard hyphen', () => {
+      expect(breaker('hello-world'))
+        .to.eql([
+          'hello-',
+          freeBreakPlaceholder,
+          'world'
+        ])
+    })
 
-//     before(() => {
-//       hyphenator.reset()
-//       Array.from(uax14('hello-world', hyphenator, hyphen))
-//     })
+    it('should insert a penalty object after a soft hyphen', () => {
+      expect(breaker('hello\u{00AD}world'))
+        .to.eql([
+          'hello\u{00AD}',
+          hyphenPlaceholder,
+          'world'
+        ])
+    })
 
-//     it('should not yield to the hyphenator callback', () => {
-//       expect(hyphenator).to.be.notCalled()
-//     })
+    it('should force a break after a line tabulation', () => {
+      expect(breaker('hello\vworld'))
+        .to.eql([
+          'hello\v',
+          eolGluePlaceholder,
+          eolPenaltyPlaceholder,
+          'world'
+        ])
+    })
 
-//     it('should optionally break after a hard hyphen', () => {
-//       expect(Array.from(uax14('hello-world', hyphenator, hyphen)))
-//         .to.eql(['hello-', FREE_BREAK, 'world'])
-//     })
+    it('should force a break after a form feed', () => {
+      expect(breaker('hello\fworld'))
+        .to.eql([
+          'hello\f',
+          eolGluePlaceholder,
+          eolPenaltyPlaceholder,
+          'world'
+        ])
+    })
 
-//     it('should insert a penalty object after a soft hyphen', () => {
-//       expect(Array.from(uax14('hello\u{00AD}world', hyphenator, hyphen)))
-//         .to.eql(['hello\u{00AD}', hyphen, 'world'])
-//     })
+    it('should force a break after a line separator', () => {
+      expect(breaker('hello\u{2028}world'))
+        .to.eql([
+          'hello\u{2028}',
+          eolGluePlaceholder,
+          eolPenaltyPlaceholder,
+          'world'
+        ])
+    })
 
-//     it('should force a break after a line tabulation', () => {
-//       expect(Array.from(uax14('hello\vworld', hyphenator, hyphen)))
-//         .to.eql(['hello\v', EOL_GLUE, EOL_PENALTY, 'world'])
-//     })
+    it('should force a break after a paragraph separator', () => {
+      expect(breaker('hello\u{2029}world'))
+        .to.eql([
+          'hello\u{2029}',
+          eolGluePlaceholder,
+          eolPenaltyPlaceholder,
+          'world'
+        ])
+    })
 
-//     it('should force a break after a form feed', () => {
-//       expect(Array.from(uax14('hello\fworld', hyphenator, hyphen)))
-//         .to.eql(['hello\f', EOL_GLUE, EOL_PENALTY, 'world'])
-//     })
+  })
 
-//     it('should force a break after a line separator', () => {
-//       expect(Array.from(uax14('hello\u{2028}world', hyphenator, hyphen)))
-//         .to.eql(['hello\u{2028}', EOL_GLUE, EOL_PENALTY, 'world'])
-//     })
+  describe('when there are terminal break opportunities', () => {
 
-//     it('should force a break after a paragraph separator', () => {
-//       expect(Array.from(uax14('hello\u{2029}world', hyphenator, hyphen)))
-//         .to.eql(['hello\u{2029}', EOL_GLUE, EOL_PENALTY, 'world'])
-//     })
+    it('should not yield to the hyphenator callback', () => {
+      hyphenator.reset()
+      breaker('hello-world-')
+      expect(hyphenator).to.be.notCalled()
+    })
 
-//   })
+    it('should not break after a trailing hard hyphen', () => {
+      expect(breaker('hello-world-'))
+        .to.eql([
+          'hello-',
+          freeBreakPlaceholder,
+          'world-'
+        ])
+    })
 
-//   describe('when there are terminal break opportunities', () => {
+    it('should not insert a penalty object after a trailing soft hyphen', () => { // eslint-disable-line max-len
+      expect(breaker('hello-world\u{00AD}'))
+        .to.eql([
+          'hello-',
+          freeBreakPlaceholder,
+          'world\u{00AD}'
+        ])
+    })
 
-//     before(() => {
-//       hyphenator.reset()
-//       Array.from(uax14('hello-world-', hyphenator, hyphen))
-//     })
+    it.skip('should force a break after a line tabulation', () => {
+      expect(breaker('hello-world\v'))
+        .to.eql([
+          'hello-',
+          freeBreakPlaceholder,
+          'world\v',
+          eolGluePlaceholder,
+          eolPenaltyPlaceholder
+        ])
+    })
 
-//     it('should not yield to the hyphenator callback', () => {
-//       expect(hyphenator).to.be.notCalled()
-//     })
+    it.skip('should force a break after a trailing form feed', () => {
+      expect(breaker('world\f'))
+        .to.eql([
+          'world\f',
+          eolGluePlaceholder,
+          eolPenaltyPlaceholder
+        ])
+    })
 
-//     it('should not break after a trailing hard hyphen', () => {
-//       expect(Array.from(uax14('hello-world-', hyphenator, hyphen)))
-//         .to.eql(['hello-', FREE_BREAK, 'world-'])
-//     })
+    it.skip('should force a break after a trailing line separator', () => {
+      expect(breaker('world\u{2028}'))
+        .to.eql([
+          'world\u{2028}',
+          eolGluePlaceholder,
+          eolPenaltyPlaceholder
+        ])
+    })
 
-//     it('should not insert a penalty object after a trailing soft hyphen', () => { // eslint-disable-line max-len
-//       expect(Array.from(uax14('hello-world\u{00AD}', hyphenator, hyphen)))
-//         .to.eql(['hello-', FREE_BREAK, 'world\u{00AD}'])
-//     })
+    it.skip('should force a break after a trailing paragraph separator', () => {
+      expect(breaker('world\u{2029}'))
+        .to.eql([
+          'world\u{2029}',
+          eolGluePlaceholder,
+          eolPenaltyPlaceholder
+        ])
+    })
 
-//     it.skip('should force a break after a line tabulation', () => {
-//       expect(Array.from(uax14('hello-world\v', hyphenator, hyphen)))
-//         .to.eql(['hello-', FREE_BREAK, 'world\v', EOL_GLUE, EOL_PENALTY])
-//     })
+  })
 
-//     it.skip('should force a break after a trailing form feed', () => {
-//       expect(Array.from(uax14('world\f', hyphenator, hyphen)))
-//         .to.eql(['world\f', EOL_GLUE, EOL_PENALTY])
-//     })
-
-//     it.skip('should force a break after a trailing line separator', () => {
-//       expect(Array.from(uax14('world\u{2028}', hyphenator, hyphen)))
-//         .to.eql(['world\u{2028}', EOL_GLUE, EOL_PENALTY])
-//     })
-
-//     it.skip('should force a break after a trailing paragraph separator', () => {
-//       expect(Array.from(uax14('world\u{2029}', hyphenator, hyphen)))
-//         .to.eql(['world\u{2029}', EOL_GLUE, EOL_PENALTY])
-//     })
-
-//   })
-
-// })
+})
