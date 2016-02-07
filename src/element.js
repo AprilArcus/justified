@@ -1,16 +1,6 @@
 /* @flow */
 
-import { injectCallbacks } from './injectCallbacks'
-import {
-  createdCallback,
-  attachedCallback,
-  detachedCallback,
-  attributeChangedCallback
-} from './elementCallbacks'
+import injectCallbacks from './injectCallbacks'
+import * as callbacks from './elementCallbacks'
 
-injectCallbacks({
-  createdCallback,
-  attachedCallback,
-  detachedCallback,
-  attributeChangedCallback
-})
+injectCallbacks(callbacks)

@@ -1,3 +1,5 @@
+/* @flow */
+
 import { ELEMENT_NODE } from './constants'
 
 const headNodes = document.head.childNodes

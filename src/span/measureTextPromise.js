@@ -1,8 +1,7 @@
-/* @flow */
 /* eslint max-nested-callbacks: 0 */
 
-import { segmentPromise } from './segmentPromise'
-import { language } from './language'
+import segmentPromise from './segmentPromise'
+import language from './language'
 import {
   Glue,
   Box,
@@ -15,8 +14,10 @@ import { gluePlaceholder, hyphenPlaceholder } from '../utils/placeholders'
 import getComputedStyle from '../utils/getComputedStyle'
 import { mutate, measure } from '../utils/fastdom'
 
-function span(string: string): HTMLSpanElement {
-  const el = document.createElement('span')
+function span (string: string): HTMLSpanElement {
+  // Flow is getting angry about unrecognized vendor properties on
+  // el.style: CSSStyleDeclaration
+  const el: any = document.createElement('span')
   el.style.position = 'absolute'
   el.style.wordBreak = 'keep-all'
   el.style.hyphens = 'none'
@@ -27,7 +28,7 @@ function span(string: string): HTMLSpanElement {
   return el
 }
 
-export function measureTextPromise(
+export function measureTextPromise (
   textNode: Text
 ): Promise<Glue|Box|Penalty> {
   // capture parent element in the closure of the promise in case

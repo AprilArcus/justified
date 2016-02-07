@@ -1,4 +1,4 @@
-import { injectCallbacks } from '../src/injectCallbacks'
+import injectCallbacks from '../src/injectCallbacks'
 import * as callbacks from '../src/elementCallbacks'
 
 // set up spies
