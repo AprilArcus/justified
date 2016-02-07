@@ -5,7 +5,7 @@ module.exports = {
   entry: {
     // justified: './src/element.js',
     'test/karma': './test/karma/entry.js',
-    'test/dom-node-iterator-shim': './test/karma/dom-node-iterator-shim.js'
+    'dom-node-iterator-shim': './src/dom-node-iterator-shim.js'
   },
   module: {
     preLoaders: [

@@ -42,7 +42,7 @@ if (process.platform === 'win32') {
       pattern: 'node_modules/node-iterator-shim/dist/node-iterator-shim.js',
       watched: false
     },
-    'http://localhost:3000/build/test/dom-node-iterator-shim.js'
+    'http://localhost:3000/build/dom-node-iterator-shim.js'
     ]
   } else if (major === 6 && minor === 0) {
     console.log('Windows Vista detected, configuring polyfills for IE 9')
