@@ -11,11 +11,11 @@ let gcs
 // truthy we conclude that it has been polyfilled.
 // https://gist.github.com/jdalton/5e34d890105aca44399f#gistcomment-1283831
 if (!window.getComputedStyle || window.getComputedStyle.prototype) {
-  gcs = function getComputedStyle(elt: HTMLElement, pseudoElt?: string): any {
+  gcs = function getComputedStyle (elt: HTMLElement, pseudoElt?: string): any {
     return { width: pseudoElt ? 0 : elt.offsetWidth } // eslint-disable-line no-ternary
   }
 } else {
   gcs = window.getComputedStyle
 }
 
-export { gcs as getComputedStyle }
+export { gcs as default }

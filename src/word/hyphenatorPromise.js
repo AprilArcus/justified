@@ -2,14 +2,14 @@
 /* eslint-env commonjs */
 
 import { MemoizingHypher as Hypher } from './MemoizingHypher'
-import { languagePatternPromise } from './languagePatternPromise'
-import { intersperse } from '../utils/intersperse'
-import { id } from '../utils/id'
+import languagePatternPromise from './languagePatternPromise'
+import intersperse from '../utils/intersperse'
+import id from '../utils/id'
 import { hyphenPlaceholder } from '../utils/placeholders'
 
 const languages = Object.create(null)
 
-export function hyphenatorPromise(
+export default function hyphenatorPromise (
   language: string
 ): Promise<(string: string) => Array<string|typeof hyphenPlaceholder>|string> {
 

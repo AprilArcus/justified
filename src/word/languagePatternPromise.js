@@ -52,7 +52,7 @@ patterns.no = patterns['nb-no']
 
 const NOT_FOUND = 404
 
-export function languagePatternPromise(
+export default function languagePatternPromise (
   language: string
 ): Promise<LanguagePattern> {
   if (patterns[language]) return Promise.resolve(patterns[language])

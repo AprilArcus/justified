@@ -1,16 +1,7 @@
-import { hyphenatorPromise } from '../../src/word/hyphenatorPromise'
-import { Penalty } from '../../src/formattingObjects'
+import hyphenatorPromise from '../../src/word/hyphenatorPromise'
 import { hyphenPlaceholder } from '../../src/utils/placeholders'
 
 describe('hyphenatorPromise()', () => {
-
-  const hyphen = new Penalty({
-    width: 10,
-    penalty: 100,
-    flagged: true,
-    value: '-',
-    kern: 0
-  })
 
   describe('when called with a valid language code', () => {
 

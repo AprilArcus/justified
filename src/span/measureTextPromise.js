@@ -12,7 +12,7 @@ import {
   FREE_BREAK
 } from '../formattingObjects'
 import { gluePlaceholder, hyphenPlaceholder } from '../utils/placeholders'
-import { getComputedStyle } from '../utils/getComputedStyle'
+import getComputedStyle from '../utils/getComputedStyle'
 import { mutate, measure } from '../utils/fastdom'
 
 function span(string: string): HTMLSpanElement {
@@ -111,7 +111,6 @@ export function measureTextPromise(
             default:
               formattingObjects[i] = new Box({
                 value: placeholder,
-                el: syllables[s],
                 width: getComputedStyle(syllables[s++]).width // eslint-disable-line no-plusplus
               })
               if (queuedHyphen) {
@@ -140,6 +139,9 @@ export function measureTextPromise(
           for (let hk = 0, hkLength = hyphens.length; hk < hkLength; hk++) {
             inline.removeChild(hyphens[hk])
             inline.removeChild(kerns[hk])
+          }
+          for (let s = 0, sLength = syllables.length; s < sLength; s++) {
+            inline.removeChild(syllables[s])
           }
         }) // end (3)
       }) // end (2)

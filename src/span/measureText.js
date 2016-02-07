@@ -1,11 +1,11 @@
-import { segmentPromise } from './segmentPromise'
-import { language } from './language'
+import segmentPromise from './segmentPromise'
+import language from './language'
 import { Glue, Box, Penalty } from '../formattingObjects'
 
 const gluePlaceholder = 0
 const hyphenPlaceholder = 1
 
-function span(string: string): HTMLSpanElement {
+function span (string: string): HTMLSpanElement {
   const el = document.createElement('span')
   el.style.position = 'absolute'
   el.style.wordBreak = 'keep-all'
@@ -17,7 +17,9 @@ function span(string: string): HTMLSpanElement {
   return el
 }
 
-export function measureText(textNode: Text): Promise<Glue|Box|Penalty> {
+export default function measureText (
+  textNode: Text
+): Promise<Glue|Box|Penalty> {
   // capture parent element in the closure of the promise in case
   // the text node is detached while the Promise fulfills
   const inline = textNode.parentNode

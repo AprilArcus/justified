@@ -1,7 +1,10 @@
 /* @flow */
 /* eslint-disable no-plusplus */
 
-export function intersperse<T, U>(array: Array<T>, delimiter: U): Array<T|U> {
+export default function intersperse<T, U> (
+  array: Array<T>,
+  delimiter: U
+): Array<T|U> {
 
   let length = array.length
   if (length === 0) return []

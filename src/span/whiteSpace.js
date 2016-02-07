@@ -1,10 +1,6 @@
 /* @flow */
 
-import {
-  gluePlaceholder,
-  beforePlaceholder,
-  afterPlaceholder
-} from '../utils/placeholders'
+import { gluePlaceholder } from '../utils/placeholders'
 
 // https://www.w3.org/TR/CSS2/text.html#propdef-white-space
 
@@ -23,7 +19,7 @@ const regex = /([\t\n\f\r ]*)([^\t\n\f\r ]*)/g
 // will not be consolidated into a glue run , but will survive until
 // being parsed into a forced break by UAX 14.
 
-export function whiteSpace<ProcessedWordT>(
+export default function whiteSpace<ProcessedWordT> (
   string: string,
   split: (word: string) => Array<ProcessedWordT>
 ): Array<typeof gluePlaceholder|ProcessedWordT> {

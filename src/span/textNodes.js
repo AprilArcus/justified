@@ -3,7 +3,9 @@
 // for IE8
 const SHOW_TEXT = window.NodeFilter && NodeFilter.SHOW_TEXT || 4 // eslint-disable-line no-magic-numbers
 
-export function textNodes(root: HTMLParagraphElement): Array<Text> {
+export default function textNodes (
+  root: HTMLParagraphElement
+): Array<Text> {
 
   const iterator = document.createNodeIterator(root, SHOW_TEXT)
   const nodes = []

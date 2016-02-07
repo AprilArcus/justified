@@ -1,6 +1,8 @@
 /* @flow */
 
-export function flatten(array: Array<any|Array<any>>): Array<any> {
+export default function flatten (
+  array: Array<any|Array<any>>
+): Array<any> {
   const flattened = []
   for (let i = 0, outerLength = array.length; i < outerLength; i++) {
     if (i in array) {

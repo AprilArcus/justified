@@ -1,4 +1,4 @@
-import { whiteSpace } from '../../src/span/whiteSpace'
+import whiteSpace from '../../src/span/whiteSpace'
 import { gluePlaceholder } from '../../src/utils/placeholders'
 
 describe('splitting text on white space', () => {

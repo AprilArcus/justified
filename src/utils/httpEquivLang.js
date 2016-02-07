@@ -1,11 +1,10 @@
+import { ELEMENT_NODE } from './constants'
+
 const headNodes = document.head.childNodes
 let searched = false
 let cached
 
-// for IE8
-const ELEMENT_NODE = window.Node && Node.ELEMENT_NODE || 1
-
-export function httpEquivLang(): ?string {
+export default function httpEquivLang (): ?string {
   if (!searched) {
     searched = true
     for (let i = 0, length = headNodes.length; i < length; i++) {
@@ -19,4 +18,9 @@ export function httpEquivLang(): ?string {
     }
   }
   return cached
+}
+
+export function reset (): void {
+  searched = false
+  cached = undefined
 }

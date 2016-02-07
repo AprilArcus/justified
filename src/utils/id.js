@@ -1,5 +1,5 @@
 /* @flow */
 
-export function id<T>(value: T): T {
+export default function id<T> (value: T): T {
   return value
 }

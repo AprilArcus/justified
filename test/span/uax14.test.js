@@ -1,4 +1,4 @@
-// import { uax14 } from '../../src/iterators/uax14'
+// import uax14 from '../../src/iterators/uax14'
 // import {
 //   Penalty,
 //   EOL_GLUE,

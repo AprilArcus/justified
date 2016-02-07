@@ -1,4 +1,4 @@
-import { intersperse } from '../../src/utils/intersperse'
+import intersperse from '../../src/utils/intersperse'
 
 describe('intersperse()', () => {
 

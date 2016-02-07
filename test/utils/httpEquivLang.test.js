@@ -1,16 +1,10 @@
 /* eslint-env commonjs */
 
-let httpEquivLang
+import httpEquivLang, { reset } from '../../src/utils/httpEquivLang'
 
 describe('httpEquivLang()', () => {
 
-  beforeEach(() => {
-    httpEquivLang = require('../../src/utils/httpEquivLang').httpEquivLang
-  })
-
-  afterEach(() => {
-    delete require.cache[require.resolve('../../src/utils/httpEquivLang')]
-  })
+  beforeEach(reset)
 
   it('is a function', () => {
     expect(httpEquivLang).to.be.a('function')

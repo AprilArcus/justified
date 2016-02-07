@@ -6,7 +6,7 @@ import { hyphenPlaceholder } from '../utils/placeholders'
 
 const SOFT_HYPHEN = '\u{00AD}'
 
-export function uax14( // eslint-disable-line max-params
+export default function uax14 (
   hyphenator: (string: string) => Array<string|typeof hyphenPlaceholder>
 ): (string: string) => Array<
   string|

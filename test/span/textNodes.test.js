@@ -1,4 +1,4 @@
-import { textNodes } from '../../src/span/textNodes'
+import textNodes from '../../src/span/textNodes'
 
 describe('iterating over text nodes', () => {
 
