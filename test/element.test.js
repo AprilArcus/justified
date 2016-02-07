@@ -18,19 +18,21 @@ describe('document.registerElement API', () => {
 
     it('should be set as a property on `window`', () => {
       expect(window.HTMLJustifiedParagraphElement).to.be.a('function')
-    });
+    })
 
-    (Object.__proto__ ? it : it.skip)( // eslint-disable-line no-ternary, no-proto
-    'should be a constructor when invoked with "new"', () => {
+    /* eslint-disable func-names, no-invalid-this, no-proto */
+    it('should be a constructor when invoked with "new"', function () {
+      if (!Object.__proto__) this.skip()
       expect(new window.HTMLJustifiedParagraphElement())
         .to.be.a(window.HTMLJustifiedParagraphElement)
-    });
+    })
 
-    (Object.__proto__ ? it : it.skip)( // eslint-disable-line no-ternary, no-proto
-    '...as well as document.createElement()', () => {
+    it('...as well as document.createElement()', function () {
+      if (!Object.__proto__) this.skip()
       expect(document.createElement('p', 'jus-ti-fied'))
         .to.be.a(window.HTMLJustifiedParagraphElement)
     })
+    /* eslint-enable func-names, no-invalid-this, no-proto */
 
     after(() => {
       prototype = window.HTMLJustifiedParagraphElement.prototype
@@ -58,7 +60,7 @@ describe('document.registerElement API', () => {
 
   describe('attachedCallback()', () => {
 
-    before((done) => {
+    before(done => {
       prototype.attachedCallback.reset()
       document.body.appendChild(el)
       setTimeout(done)
@@ -82,7 +84,7 @@ describe('document.registerElement API', () => {
 
     describe('adding an attribute', () => {
 
-      before((done) => {
+      before(done => {
         el.setAttribute('class', 'fooClass')
         setTimeout(done)
       })
@@ -96,7 +98,7 @@ describe('document.registerElement API', () => {
 
     describe('altering an attribute', () => {
 
-      before((done) => {
+      before(done => {
         el.setAttribute('class', 'barClass')
         setTimeout(done)
       })
@@ -110,7 +112,7 @@ describe('document.registerElement API', () => {
 
     describe('removing an attribute', () => {
 
-      before((done) => {
+      before(done => {
         el.removeAttribute('class')
         setTimeout(done)
       })
@@ -130,7 +132,7 @@ describe('document.registerElement API', () => {
 
   describe('detachedCallback()', () => {
 
-    before((done) => {
+    before(done => {
       prototype.detachedCallback.reset()
       document.body.removeChild(el)
       setTimeout(done)
