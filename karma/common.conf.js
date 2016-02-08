@@ -2,7 +2,7 @@ module.exports = {
 
   // base path that will be used to resolve all patterns
   // (eg. files, exclude)
-  basePath: '../..',
+  basePath: '..',
 
   // frameworks to use
   // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -18,7 +18,7 @@ module.exports = {
       pattern: 'node_modules/babel-polyfill/dist/polyfill.js',
       watched: false
     },
-    'http://localhost:3000/build/test/karma.js'
+    'http://localhost:3000/build/test.js'
   ],
 
   // list of files to exclude

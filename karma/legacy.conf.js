@@ -18,7 +18,7 @@ if (process.platform === 'win32') {
   } else if (major === 5 && minor === 1) {
     console.log('Windows XP detected, configuring polyfills for IE 8')
     polyfills = [{
-      pattern: 'test/karma/setTimeout.js',
+      pattern: 'test/setTimeout.js',
       watched: false
     }, {
       pattern: 'node_modules/ie8/build/ie8.max.js',

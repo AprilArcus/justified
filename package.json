@@ -7,9 +7,9 @@
     "flow": "flow",
     "flow:check": "flow check",
     "karma": "karma",
-    "test:polyfill": "karma start test/karma/polyfill.conf.js",
-    "test:native": "karma start test/karma/native.conf.js",
-    "test:legacy": "karma start test/karma/legacy.conf.js",
+    "test:polyfill": "karma start karma/polyfill.conf.js",
+    "test:native": "karma start karma/native.conf.js",
+    "test:legacy": "karma start karma/legacy.conf.js",
     "test": "node testRunner.js"
   },
   "repository": {
