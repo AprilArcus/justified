@@ -21,28 +21,31 @@ const regex = /([\t\n\f\r ]*)([^\t\n\f\r ]*)/g
 // being parsed into a forced break by UAX 14.
 
 export default function whiteSpace (
-  split: (word: string) => Array<Placeholder|string>,
-  text: string
-): Array<Placeholder|string> {
+  split: (word: string) => Array<Placeholder|string>
+): (text: string) => Array<Placeholder|string> {
 
-  let match
-  const out = []
+  return text => {
 
-  do {
-    let whitespace // eslint-disable-line prefer-const
-    let word // eslint-disable-line prefer-const
+    let match
+    const out = []
 
-    [match, whitespace, word] = regex.exec(text)
-    if (whitespace) out.push(gluePlaceholder)
-    if (word) {
-      const syllables = split(word)
-      for (let i = 0, length = syllables.length; i < length; i++) {
-        out.push(syllables[i])
+    do {
+      let whitespace // eslint-disable-line prefer-const
+      let word // eslint-disable-line prefer-const
+
+      [match, whitespace, word] = regex.exec(text)
+      if (whitespace) out.push(gluePlaceholder)
+      if (word) {
+        const syllables = split(word)
+        for (let i = 0, length = syllables.length; i < length; i++) {
+          out.push(syllables[i])
+        }
       }
-    }
-  } while (match)
+    } while (match)
 
-  regex.lastIndex = 0
-  return out
+    regex.lastIndex = 0
+    return out
+
+  }
 
 }
